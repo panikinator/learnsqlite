@@ -65,7 +65,8 @@ params:
       - ## Scalibility is cool but will you ever?
 
       - ## Embrace Simplicity not trends.
-
+  images:
+    - logo.webp
 languages:
   en:
     menu:
