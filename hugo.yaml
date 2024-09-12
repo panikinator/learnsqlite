@@ -1,0 +1,68 @@
+baseURL: https://example.org/
+languageCode: en-us
+title: LearnSQLite
+theme: ["PaperMod"]
+
+enableInlineShortcodes: true
+enableRobotsTXT: true
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+enableEmoji: true
+pygmentsUseClasses: true
+
+minify:
+  disableXML: true
+
+params:
+  env: production
+  description: "LearnSQLite Blog"
+  author: panikinator
+  ShowToc: true
+  ShowShareButtons: true
+  ShowReadingTime: true
+  disableSpecial1stPost: true
+  defaultTheme: auto
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+  ShowRssButtonInSectionTermList: true
+  ShowAllPagesInArchive: true
+  ShowPageNums: true
+  ShowToc: true
+  assets:
+    favicon: "/favicon.ico"
+    favicon16x16: "/logo16x16.png"
+    favicon32x32: "/logo32x32.png"
+    apple_touch_icon: "/logo.png"
+    safari_pinned_tab: "/logo.png"
+
+  label:
+    icon: "/logo.png"
+
+  homeInfoParams:
+    Title: "LearnSQLite"
+    Content: >
+      # 👋 Welcome to the place of learning SQLite!
+
+      - ## Why do more when less is enough?
+
+      - ## Scalibility is cool but will you ever?
+
+      - ## Embrace Simplicity not trends.
+
+languages:
+  en:
+    menu:
+      main:
+        - name: Archive
+          url: archives
+          weight: 5
+        - name: Search
+          url: search/
+          weight: 10
+        - name: Tags
+          url: tags/
+          weight: 10
+
+
