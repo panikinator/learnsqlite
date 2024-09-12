@@ -30,15 +30,15 @@ params:
   ShowAllPagesInArchive: true
   ShowPageNums: true
   ShowToc: true
-  assets:
-    favicon: "/favicon.ico"
-    favicon16x16: "/logo16x16.png"
-    favicon32x32: "/logo32x32.png"
-    apple_touch_icon: "/logo.png"
-    safari_pinned_tab: "/logo.png"
+  # assets:
+  #   favicon: "/favicon.ico"
+  #   favicon16x16: "/logo16x16.png"
+  #   favicon32x32: "/logo32x32.png"
+  #   apple_touch_icon: "/logo.png"
+  #   safari_pinned_tab: "/logo.png"
 
   label:
-    icon: "/logo.png"
+    icon: "/logo.webp"
 
   homeInfoParams:
     Title: "LearnSQLite"
