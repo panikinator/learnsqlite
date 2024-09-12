@@ -2,6 +2,13 @@ baseURL: https://example.org/
 languageCode: en-us
 title: LearnSQLite
 theme: ["PaperMod"]
+baseURL: "localhost"
+mainsections: ["posts"]
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
 
 enableInlineShortcodes: true
 enableRobotsTXT: true
@@ -30,6 +37,14 @@ params:
   ShowAllPagesInArchive: true
   ShowPageNums: true
   ShowToc: true
+  fuseOpts:
+      isCaseSensitive: false
+      shouldSort: true
+      location: 0
+      distance: 1000
+      threshold: 0.4
+      minMatchCharLength: 0
+      keys: ["title", "permalink", "summary", "content"]
   # assets:
   #   favicon: "/favicon.ico"
   #   favicon16x16: "/logo16x16.png"

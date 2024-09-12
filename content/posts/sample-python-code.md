@@ -1,5 +1,5 @@
 +++
-title = 'SQLite Write Ahead Logging2'
+title = 'Sample python code'
 date = 2024-09-12T16:23:23+05:30
 draft = true
 +++

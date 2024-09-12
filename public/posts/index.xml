@@ -2,28 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Posts on LearnSQLite</title>
-    <link>http://localhost:1313/posts/</link>
+    <link>localhost/posts/</link>
     <description>Recent content in Posts on LearnSQLite</description>
     <generator>Hugo -- 0.134.2</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 12 Sep 2024 16:23:23 +0530</lastBuildDate>
-    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>SQLite Write Ahead Logging2</title>
-      <link>http://localhost:1313/posts/sqlite-write-ahead-logging2/</link>
-      <pubDate>Thu, 12 Sep 2024 16:23:23 +0530</pubDate>
-      <guid>http://localhost:1313/posts/sqlite-write-ahead-logging2/</guid>
-      <description>&lt;h1 id=&#34;hello-world&#34;&gt;Hello World&lt;/h1&gt;
-&lt;h2 id=&#34;second-test-page&#34;&gt;second test page&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;range&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
-    </item>
+    <lastBuildDate>Thu, 12 Sep 2024 16:09:02 +0530</lastBuildDate>
+    <atom:link href="localhost/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>SQLite Write Ahead Logging</title>
-      <link>http://localhost:1313/posts/sqlite-write-ahead-logging/</link>
+      <link>localhost/posts/sqlite-write-ahead-logging/</link>
       <pubDate>Thu, 12 Sep 2024 16:09:02 +0530</pubDate>
-      <guid>http://localhost:1313/posts/sqlite-write-ahead-logging/</guid>
+      <guid>localhost/posts/sqlite-write-ahead-logging/</guid>
       <description>&lt;h1 id=&#34;mastering-sqlite-write-ahead-logging-wal-use-cases-best-practices-and-performance-benchmarks&#34;&gt;Mastering SQLite Write-Ahead Logging (WAL): Use Cases, Best Practices, and Performance Benchmarks&lt;/h1&gt;
 &lt;hr&gt;
 &lt;p&gt;By default, SQLite uses a rollback journal mode to ensure atomicity, consistency, isolation, and durability (ACID) compliance. However, SQLite offers an alternative journaling mode called Write-Ahead Logging (WAL), which dramatically improves write performance and allows concurrent read and write operations.&lt;/p&gt;
