@@ -1,8 +1,7 @@
-baseURL: https://example.org/
+baseURL: https://learnsqlite.dev
 languageCode: en-us
 title: LearnSQLite
 theme: ["PaperMod"]
-baseURL: "localhost"
 mainsections: ["posts"]
 outputs:
   home:
