@@ -131,9 +131,10 @@ WAL mode works best when checkpoints are infrequent, allowing the WAL file to gr
 ---
 
 ## Performance Benchmarks
-
+TODO:
 
 ---
 
 
 ## Conclusion:
+TODO:
