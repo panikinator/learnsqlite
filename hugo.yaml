@@ -37,14 +37,14 @@ params:
   ShowAllPagesInArchive: true
   ShowPageNums: true
   ShowToc: true
-  fuseOpts:
-      isCaseSensitive: false
-      shouldSort: true
-      location: 0
-      distance: 1000
-      threshold: 0.4
-      minMatchCharLength: 0
-      keys: ["title", "permalink", "summary", "content"]
+  # fuseOpts:
+  #     isCaseSensitive: false
+  #     shouldSort: true
+  #     location: 0
+  #     distance: 1000
+  #     threshold: 0.4
+  #     minMatchCharLength: 0
+  #     keys: ["title", "permalink", "summary", "content"]
   # assets:
   #   favicon: "/favicon.ico"
   #   favicon16x16: "/logo16x16.png"

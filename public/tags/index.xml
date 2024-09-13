@@ -4,6 +4,11 @@
     <title>Tags on LearnSQLite</title>
     <link>localhost/tags/</link>
     <description>Recent content in Tags on LearnSQLite</description>
+    <image>
+      <title>LearnSQLite</title>
+      <url>localhost/full_logo.png</url>
+      <link>localhost/full_logo.png</link>
+    </image>
     <generator>Hugo -- 0.134.2</generator>
     <language>en</language>
     <atom:link href="localhost/tags/index.xml" rel="self" type="application/rss+xml" />
