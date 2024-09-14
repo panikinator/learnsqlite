@@ -7,10 +7,8 @@
 <meta name="robots" content="index, follow">
 <title>SQLite Write Ahead Logging | LearnSQLite</title>
 <meta name="keywords" content="">
-<meta name="description" content="Mastering SQLite Write-Ahead Logging (WAL): Use Cases, Best Practices, and Performance Benchmarks
-
-By default, SQLite uses a rollback journal mode to ensure atomicity, consistency, isolation, and durability (ACID) compliance. However, SQLite offers an alternative journaling mode called Write-Ahead Logging (WAL), which dramatically improves write performance and allows concurrent read and write operations.
-In this post, we’ll dive deep into SQLite’s WAL mode, explaining how it works, when to use it, and its pros and cons. We’ll also explore benchmarks to see how it performs in different scenarios.">
+<meta name="description" content="Mastering SQLite Write-Ahead Logging (WAL): Use Cases, Best Practices, and Performance Benchmarks By default, SQLite uses a rollback journal mode to ensure atomicity, consistency, isolation, and durability (ACID) compliance. However, SQLite offers an alternative journaling mode called Write-Ahead Logging (WAL), which dramatically improves write performance and allows concurrent read and write operations.
+In this post, we’ll dive deep into SQLite’s WAL mode, explaining how it works, when to use it, and its pros and cons.">
 <meta name="author" content="panikinator">
 <link rel="canonical" href="http://localhost:1313/posts/sqlite-write-ahead-logging/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.682361e61c3c86eb6defdb7d48994d370670c932733f961d1bff6791ec36466d.css" integrity="sha256-aCNh5hw8hutt79t9SJlNNwZwyTJzP5YdG/9nkew2Rm0=" rel="preload stylesheet" as="style">
@@ -60,10 +58,8 @@ In this post, we’ll dive deep into SQLite’s WAL mode, explaining how it work
 
     </style>
 </noscript><meta property="og:title" content="SQLite Write Ahead Logging" />
-<meta property="og:description" content="Mastering SQLite Write-Ahead Logging (WAL): Use Cases, Best Practices, and Performance Benchmarks
-
-By default, SQLite uses a rollback journal mode to ensure atomicity, consistency, isolation, and durability (ACID) compliance. However, SQLite offers an alternative journaling mode called Write-Ahead Logging (WAL), which dramatically improves write performance and allows concurrent read and write operations.
-In this post, we’ll dive deep into SQLite’s WAL mode, explaining how it works, when to use it, and its pros and cons. We’ll also explore benchmarks to see how it performs in different scenarios." />
+<meta property="og:description" content="Mastering SQLite Write-Ahead Logging (WAL): Use Cases, Best Practices, and Performance Benchmarks By default, SQLite uses a rollback journal mode to ensure atomicity, consistency, isolation, and durability (ACID) compliance. However, SQLite offers an alternative journaling mode called Write-Ahead Logging (WAL), which dramatically improves write performance and allows concurrent read and write operations.
+In this post, we’ll dive deep into SQLite’s WAL mode, explaining how it works, when to use it, and its pros and cons." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/posts/sqlite-write-ahead-logging/" />
 <meta property="og:image" content="http://localhost:1313/full_logo.png" />
@@ -74,10 +70,8 @@ In this post, we’ll dive deep into SQLite’s WAL mode, explaining how it work
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="http://localhost:1313/full_logo.png" />
 <meta name="twitter:title" content="SQLite Write Ahead Logging"/>
-<meta name="twitter:description" content="Mastering SQLite Write-Ahead Logging (WAL): Use Cases, Best Practices, and Performance Benchmarks
-
-By default, SQLite uses a rollback journal mode to ensure atomicity, consistency, isolation, and durability (ACID) compliance. However, SQLite offers an alternative journaling mode called Write-Ahead Logging (WAL), which dramatically improves write performance and allows concurrent read and write operations.
-In this post, we’ll dive deep into SQLite’s WAL mode, explaining how it works, when to use it, and its pros and cons. We’ll also explore benchmarks to see how it performs in different scenarios."/>
+<meta name="twitter:description" content="Mastering SQLite Write-Ahead Logging (WAL): Use Cases, Best Practices, and Performance Benchmarks By default, SQLite uses a rollback journal mode to ensure atomicity, consistency, isolation, and durability (ACID) compliance. However, SQLite offers an alternative journaling mode called Write-Ahead Logging (WAL), which dramatically improves write performance and allows concurrent read and write operations.
+In this post, we’ll dive deep into SQLite’s WAL mode, explaining how it works, when to use it, and its pros and cons."/>
 
 
 <script type="application/ld+json">
@@ -106,7 +100,7 @@ In this post, we’ll dive deep into SQLite’s WAL mode, explaining how it work
   "@type": "BlogPosting",
   "headline": "SQLite Write Ahead Logging",
   "name": "SQLite Write Ahead Logging",
-  "description": "Mastering SQLite Write-Ahead Logging (WAL): Use Cases, Best Practices, and Performance Benchmarks By default, SQLite uses a rollback journal mode to ensure atomicity, consistency, isolation, and durability (ACID) compliance. However, SQLite offers an alternative journaling mode called Write-Ahead Logging (WAL), which dramatically improves write performance and allows concurrent read and write operations.\nIn this post, we’ll dive deep into SQLite’s WAL mode, explaining how it works, when to use it, and its pros and cons. We’ll also explore benchmarks to see how it performs in different scenarios.\n",
+  "description": "Mastering SQLite Write-Ahead Logging (WAL): Use Cases, Best Practices, and Performance Benchmarks By default, SQLite uses a rollback journal mode to ensure atomicity, consistency, isolation, and durability (ACID) compliance. However, SQLite offers an alternative journaling mode called Write-Ahead Logging (WAL), which dramatically improves write performance and allows concurrent read and write operations.\nIn this post, we’ll dive deep into SQLite’s WAL mode, explaining how it works, when to use it, and its pros and cons.",
   "keywords": [
     
   ],
@@ -203,7 +197,7 @@ In this post, we’ll dive deep into SQLite’s WAL mode, explaining how it work
     <h1 class="post-title entry-hint-parent">
       SQLite Write Ahead Logging
     </h1>
-    <div class="post-meta"><span title='2024-09-12 16:09:02 +0530 IST'>September 12, 2024</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;panikinator
+    <div class="post-meta"><span title='2024-09-12 16:09:02 +0530 +0530'>September 12, 2024</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;panikinator
 
 </div>
   </header> <div class="toc">
@@ -434,25 +428,25 @@ I used the following go script to benchmark the database as go is a good choice 
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>And here are the results:</p>
 <table>
-  <thead>
-      <tr>
-          <th style="text-align: left">Mode</th>
-          <th style="text-align: left">IO/s</th>
-          <th style="text-align: left">Time Elapsed</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: left">Normal</td>
-          <td style="text-align: left">56.54</td>
-          <td style="text-align: left">17.68s</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">WAL</td>
-          <td style="text-align: left">17377.66</td>
-          <td style="text-align: left">57.54ms</td>
-      </tr>
-  </tbody>
+<thead>
+<tr>
+<th>Mode</th>
+<th>IO/s</th>
+<th>Time Elapsed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Normal</td>
+<td>56.54</td>
+<td>17.68s</td>
+</tr>
+<tr>
+<td>WAL</td>
+<td>17377.66</td>
+<td>57.54ms</td>
+</tr>
+</tbody>
 </table>
 <p>Yeah I know</p>
 <hr>
@@ -465,6 +459,13 @@ I used the following go script to benchmark the database as go is a good choice 
   <footer class="post-footer">
     <ul class="post-tags">
     </ul>
+<nav class="paginav">
+  <a class="prev" href="http://localhost:1313/posts/second-test-post/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>Second Test Post</span>
+  </a>
+</nav>
 
 
 <ul class="share-buttons">
