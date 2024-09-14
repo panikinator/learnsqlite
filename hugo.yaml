@@ -2,7 +2,7 @@ baseURL: https://learnsqlite.dev
 languageCode: en-us
 title: LearnSQLite
 theme: ["PaperMod"]
-mainsections: ["posts"]
+# mainsections: ["posts"]
 outputs:
   home:
     - HTML
@@ -24,6 +24,7 @@ params:
   env: production
   description: "LearnSQLite Blog"
   author: panikinator
+  comments: true
   ShowToc: true
   ShowShareButtons: true
   ShowReadingTime: true
@@ -81,3 +82,6 @@ languages:
           weight: 10
 
 
+services:
+  disqus:
+    shortname: learnsqlite
