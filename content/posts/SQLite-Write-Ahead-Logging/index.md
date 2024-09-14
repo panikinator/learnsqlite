@@ -2,6 +2,7 @@
 title = 'SQLite Write Ahead Logging'
 date = 2024-09-12T16:09:02+05:30
 draft = false
+author = ['panikinator']
 +++
 # Mastering SQLite Write-Ahead Logging (WAL): Use Cases, Best Practices, and Performance Benchmarks
 
