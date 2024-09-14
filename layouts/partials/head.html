@@ -74,21 +74,12 @@
 <link crossorigin="anonymous" href="{{ $stylesheet.RelPermalink }}" rel="preload stylesheet" as="style">
 {{- end }}
 <script defer data-domain="learnsqlite.dev" src="https://plausible.learnsqlite.dev/js/script.js"></script>
-<script defer>
+<script>
     var remark_config = {
       host: 'https://remark42.learnsqlite.dev',
       site_id: 'learnsqlite.dev',
-      theme: document.body.className.includes("dark")? "dark": "light",
+      theme: "dark",
     }
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-        if (document.body.className.includes("dark")) {
-            localStorage.setItem("pref-theme", 'light');
-            window.REMARK42.changeTheme('light');
-        } else {
-            localStorage.setItem("pref-theme", 'dark');
-            window.REMARK42.changeTheme('dark');
-        }
-    })
 </script>
 <script>!function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);</script>
 {{- /* Search */}}
