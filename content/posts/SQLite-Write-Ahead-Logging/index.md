@@ -131,145 +131,121 @@ WAL mode works best when checkpoints are infrequent, allowing the WAL file to gr
 ---
 
 ## Performance Benchmarks
-The benchmarks were performed on my laptops, the figures are only meant to be seen relatively.
-I used the following python script to benchmark the database
-```python
-import concurrent.futures
-import os
-import random
-import sqlite3
-import time
+The benchmarks were performed on a proxmox LXC with 1 CPU and 512MB of RAM, the figures are only meant to be judged relatively.
+I used the following go script to benchmark the database as go is a good choice for concurrent programs 
+```go
+package main
 
+import (
+	"database/sql"
+	"fmt"
+	"math/rand"
+	"sync"
+	"time"
+	"os"
 
-def create_table(conn):
-    cursor = conn.cursor()
-    cursor.execute(
-        """CREATE TABLE IF NOT EXISTS test_table
-                      (id INTEGER PRIMARY KEY, value TEXT)"""
-    )
-    conn.commit()
+	_ "github.com/mattn/go-sqlite3"
+)
 
+const (
+	dbPath        = "./test.db"
+	numOperations = 1000
+	numWorkers    = 10
+)
 
-def insert_data(db_file, num_records):
-    conn = sqlite3.connect(db_file)
-    cursor = conn.cursor()
-    for i in range(num_records):
-        cursor.execute("INSERT INTO test_table (value) VALUES (?)", (f"Value {i}",))
-    conn.commit()
-    conn.close()
+func main() {
+	// Test without WAL
+	err := os.Remove(dbPath) 
+    	if err != nil { 
+        fmt.Println(err) 
+    	}
+	fmt.Println("Testing without WAL:")
+	runTest(false)
 
+    	if err != nil { 
+        fmt.Println(err) 
+    	}
+	// Test with WAL
+	fmt.Println("\nTesting with WAL:")
+	runTest(true)
+}
 
-def read_data(db_file, num_reads):
-    conn = sqlite3.connect(db_file)
-    cursor = conn.cursor()
-    for _ in range(num_reads):
-        cursor.execute(
-            "SELECT * FROM test_table WHERE id = ?", (random.randint(1, 10000),)
-        )
-        cursor.fetchone()
-    conn.close()
+func runTest(useWAL bool) {
+	db, err := sql.Open("sqlite3", dbPath)
+	if err != nil {
+		panic(err)
+	}
+	defer db.Close()
 
+	if useWAL {
+		_, err = db.Exec("PRAGMA journal_mode=WAL;")
+		if err != nil {
+			panic(err)
+		}
+	}
 
-def concurrent_operations(
-    db_file, num_writers, num_readers, records_per_writer, reads_per_reader
-):
-    with concurrent.futures.ThreadPoolExecutor(
-        max_workers=num_writers + num_readers
-    ) as executor:
-        # Start write operations
-        write_futures = [
-            executor.submit(insert_data, db_file, records_per_writer)
-            for _ in range(num_writers)
-        ]
+	// Create table
+	_, err = db.Exec(`CREATE TABLE IF NOT EXISTS test_table (id INTEGER PRIMARY KEY, value TEXT);`)
+	if err != nil {
+		panic(err)
+	}
 
-        # Start read operations
-        read_futures = [
-            executor.submit(read_data, db_file, reads_per_reader)
-            for _ in range(num_readers)
-        ]
+	// Clear table
+	_, err = db.Exec(`DELETE FROM test_table;`)
+	if err != nil {
+		panic(err)
+	}
 
-        # Wait for all operations to complete
-        concurrent.futures.wait(write_futures + read_futures)
+	start := time.Now()
 
+	var wg sync.WaitGroup
+	for i := 0; i < numWorkers; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			for j := 0; j < numOperations/numWorkers; j++ {
+				if rand.Float32() < 0.5 {
+					// Write operation
+					_, err := db.Exec("INSERT INTO test_table (value) VALUES (?)", randomString(10))
+					if err != nil {
+						fmt.Printf("Write error: %v\n", err)
+					}
+				} else {
+					// Read operation
+					var value string
+					err := db.QueryRow("SELECT value FROM test_table ORDER BY RANDOM() LIMIT 1").Scan(&value)
+					if err != nil && err != sql.ErrNoRows {
+						fmt.Printf("Read error: %v\n", err)
+					}
+				}
+			}
+		}()
+	}
 
-def run_benchmark(
-    db_file, enable_wal, num_writers, num_readers, records_per_writer, reads_per_reader
-):
-    if os.path.exists(db_file):
-        os.remove(db_file)
+	wg.Wait()
 
-    conn = sqlite3.connect(db_file)
+	duration := time.Since(start)
+	fmt.Printf("Time taken: %v\n", duration)
+	fmt.Printf("Operations per second: %.2f\n", float64(numOperations)/duration.Seconds())
+}
 
-    if enable_wal:
-        conn.execute("PRAGMA journal_mode=WAL")
-
-    create_table(conn)
-    conn.close()
-
-    start_time = time.time()
-    concurrent_operations(
-        db_file, num_writers, num_readers, records_per_writer, reads_per_reader
-    )
-    end_time = time.time()
-
-    total_time = end_time - start_time
-    total_writes = num_writers * records_per_writer
-    total_reads = num_readers * reads_per_reader
-
-    return total_time, total_writes / total_time, total_reads / total_time
-
-
-def main():
-    num_writers = 12
-    num_readers = 40
-    records_per_writer = 2000
-    reads_per_reader = 1000
-
-    # Run benchmark without WAL
-    time_no_wal, writes_no_wal, reads_no_wal = run_benchmark(
-        "test_no_wal.db",
-        False,
-        num_writers,
-        num_readers,
-        records_per_writer,
-        reads_per_reader,
-    )
-
-    # Run benchmark with WAL
-    time_wal, writes_wal, reads_wal = run_benchmark(
-        "test_wal.db",
-        True,
-        num_writers,
-        num_readers,
-        records_per_writer,
-        reads_per_reader,
-    )
-
-    print(f"Without WAL:")
-    print(f"  Total time: {time_no_wal:.2f} seconds")
-    print(f"  Writes per second: {writes_no_wal:.2f}")
-    print(f"  Reads per second: {reads_no_wal:.2f}")
-    print(f"\nWith WAL:")
-    print(f"  Total time: {time_wal:.2f} seconds")
-    print(f"  Writes per second: {writes_wal:.2f}")
-    print(f"  Reads per second: {reads_wal:.2f}")
-
-    print(f"\nWAL vs No WAL comparison:")
-    print(f"  Total time improvement: {(time_no_wal / time_wal - 1) * 100:.2f}%")
-    print(f"  Write speed improvement: {(writes_wal / writes_no_wal - 1) * 100:.2f}%")
-    print(f"  Read speed improvement: {(reads_wal / reads_no_wal - 1) * 100:.2f}%")
-
-
-if __name__ == "__main__":
-    main()
-
+func randomString(length int) string {
+	const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+	b := make([]byte, length)
+	for i := range b {
+		b[i] = charset[rand.Intn(len(charset))]
+	}
+	return string(b)
+}
 ```
 
 And here are the results:
-|Mode|Writes/s|Reads/s|
+|Mode|IO/s|Time Elapsed|
 |---|---|---|
-|Normal|8408|14014|
-|WAL|9768|16281|
+|Normal|56.54|17.68s|
+|WAL|17377.66|57.54ms|
+
+Yeah I know
 
 ---
 
