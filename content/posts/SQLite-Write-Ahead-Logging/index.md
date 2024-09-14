@@ -140,9 +140,9 @@ import (
 	"database/sql"
 	"fmt"
 	"math/rand"
+	"os"
 	"sync"
 	"time"
-	"os"
 
 	_ "github.com/mattn/go-sqlite3"
 )
@@ -155,16 +155,16 @@ const (
 
 func main() {
 	// Test without WAL
-	err := os.Remove(dbPath) 
-    	if err != nil { 
-        fmt.Println(err) 
-    	}
+	err := os.Remove(dbPath)
+	if err != nil {
+		fmt.Println(err)
+	}
 	fmt.Println("Testing without WAL:")
 	runTest(false)
 
-    	if err != nil { 
-        fmt.Println(err) 
-    	}
+	if err != nil {
+		fmt.Println(err)
+	}
 	// Test with WAL
 	fmt.Println("\nTesting with WAL:")
 	runTest(true)
@@ -206,14 +206,16 @@ func runTest(useWAL bool) {
 			for j := 0; j < numOperations/numWorkers; j++ {
 				if rand.Float32() < 0.5 {
 					// Write operation
-					_, err := db.Exec("INSERT INTO test_table (value) VALUES (?)", randomString(10))
+					_, err := db.Exec("INSERT INTO test_table (value) VALUES (?)",
+						randomString(10))
 					if err != nil {
 						fmt.Printf("Write error: %v\n", err)
 					}
 				} else {
 					// Read operation
 					var value string
-					err := db.QueryRow("SELECT value FROM test_table ORDER BY RANDOM() LIMIT 1").Scan(&value)
+					q := "SELECT value FROM test_table ORDER BY RANDOM() LIMIT 1"
+					err := db.QueryRow(q).Scan(&value)
 					if err != nil && err != sql.ErrNoRows {
 						fmt.Printf("Read error: %v\n", err)
 					}
@@ -237,6 +239,7 @@ func randomString(length int) string {
 	}
 	return string(b)
 }
+
 ```
 
 And here are the results:
