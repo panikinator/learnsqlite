@@ -11,7 +11,24 @@
 <meta name="author" content="panikinator">
 <link rel="canonical" href="http://localhost:1313/archives/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.682361e61c3c86eb6defdb7d48994d370670c932733f961d1bff6791ec36466d.css" integrity="sha256-aCNh5hw8hutt79t9SJlNNwZwyTJzP5YdG/9nkew2Rm0=" rel="preload stylesheet" as="style">
-<script defer data-domain="learnsqlite.dev" src="https://plausible.0393939.xyz/js/script.js"></script>
+<script defer data-domain="learnsqlite.dev" src="https://plausible.learnsqlite.dev/js/script.js"></script>
+<script defer>
+    var remark_config = {
+      host: 'https://remark42.learnsqlite.dev',
+      site_id: 'learnsqlite.dev',
+      theme: document.body.className.includes("dark")? "dark": "light",
+    }
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            localStorage.setItem("pref-theme", 'light');
+            window.REMARK42.changeTheme('light');
+        } else {
+            localStorage.setItem("pref-theme", 'dark');
+            window.REMARK42.changeTheme('dark');
+        }
+    })
+</script>
+<script>!function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);</script>
 <link rel="icon" href="http://localhost:1313/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
