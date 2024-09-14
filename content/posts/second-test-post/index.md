@@ -1,7 +1,7 @@
 +++
 title = 'Second Test Post'
 date = 2024-09-14T11:45:11Z
-draft = true
+draft = false
 +++
 
 # Cats
