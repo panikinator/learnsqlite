@@ -70,13 +70,13 @@ languages:
   en:
     menu:
       main:
-        - name: Archive
+        - name: Archive📚️
           url: archives
           weight: 5
-        - name: Search
+        - name: Search📚️
           url: search/
           weight: 10
-        - name: Tags
+        - name: Tags🏷️
           url: tags/
           weight: 10
 
