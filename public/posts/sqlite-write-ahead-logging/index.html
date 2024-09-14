@@ -15,15 +15,6 @@ In this post, we’ll dive deep into SQLite’s WAL mode, explaining how it work
 <link rel="canonical" href="http://localhost:1313/posts/sqlite-write-ahead-logging/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.682361e61c3c86eb6defdb7d48994d370670c932733f961d1bff6791ec36466d.css" integrity="sha256-aCNh5hw8hutt79t9SJlNNwZwyTJzP5YdG/9nkew2Rm0=" rel="preload stylesheet" as="style">
 <script defer data-domain="learnsqlite.dev" src="https://plausible.learnsqlite.dev/js/script.js"></script>
-<script >
-    var remark_config = {
-      host: 'https://remark42.learnsqlite.dev',
-      site_id: 'learnsqlite.dev',
-      theme: "dark",
-    }
-
-    !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
-</script>
 <link rel="icon" href="http://localhost:1313/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
@@ -640,7 +631,15 @@ I used the following python script to benchmark the database</p>
         }
     })
 
-    window.REMARK42.changeTheme(document.body.className.includes("dark")? "dark": "light");
+</script>
+<script >
+    var remark_config = {
+      host: 'https://remark42.learnsqlite.dev',
+      site_id: 'learnsqlite.dev',
+      theme: document.body.className.includes("dark")? "dark": "light",
+    }
+
+    !function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);
 </script>
 <script>
     document.querySelectorAll('pre > code').forEach((codeblock) => {
