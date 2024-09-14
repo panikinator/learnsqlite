@@ -23,7 +23,6 @@ minify:
 params:
   env: production
   description: "LearnSQLite Blog"
-  author: panikinator
   comments: true
   ShowToc: true
   ShowShareButtons: true
