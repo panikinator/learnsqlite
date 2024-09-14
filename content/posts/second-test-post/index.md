@@ -2,7 +2,7 @@
 title = 'Second Test Post'
 date = 2024-09-14T11:45:11Z
 draft = false
-author: ayus
+author = ayus
 +++
 
 # Cats
